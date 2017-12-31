@@ -16,16 +16,6 @@ NXP MC33660 / MC33290
 ```
 Install:
 
-platformio init -b teensy3.6
+http://wiki.team-moki.nl/display/MOK/Webasto+Teensy
 
-platformio lib install git+https://github.com/adafruit/Adafruit-GFX-Library
-platformio lib install git+https://github.com/adafruit/Adafruit_SSD1306
-
-platformio run -t upload
-
-
-```
-Set Arduino/Teensy Time:
-
-t=`date +%s` ; s=`echo -n "TIME:" ; expr $t + 3600` ; echo $s > /dev/ttyACM0
 
