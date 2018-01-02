@@ -98,7 +98,7 @@ void loop() {
 //    Serial.println(webasto.status_ms);
     display.print("'C");
  
-    display.setCursor(60,0);
+    display.setCursor(68,0);
     display.print(dayShortStr(weekday()));
  
     display.setCursor(94,0);
@@ -133,6 +133,10 @@ void loop() {
     display.setTextSize(2);
     display.println("C");
     display.setTextSize(1);
+
+    display.setCursor(0,24);
+    display.print(webasto.status_os,HEX);
+
     display.setCursor(20,24);
     display.print("Power: ");
     display.print(webasto.status_hp);
