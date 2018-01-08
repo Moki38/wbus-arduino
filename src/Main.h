@@ -1,5 +1,5 @@
 /*
- Copyright (C) 2017 Eric van Dijken <eric@team-moki.nl>
+ Copyright (C) 2018 Eric van Dijken <eric@team-moki.nl>
  Permission is hereby granted, free of charge, to any person obtaining a copy
  of this software and associated documentation files (the "Software"), to deal
  in the Software without restriction, including without limitation the rights
@@ -17,10 +17,9 @@
  THE SOFTWARE.
 */
 
-#define DEBUG
+#include "Config.h"
 
 #include <Arduino.h>
-
 
 #include <SPI.h>
 #include <Wire.h>
@@ -28,10 +27,14 @@
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
 
-#define OLED_RESET 4
-Adafruit_SSD1306 display(OLED_RESET);
-
 #include "Symbols.h"
+
+#ifdef SDCARD
 #include "Sdcard.h"
+#endif
+
 #include "Webasto.h"
 #include "Wbus.h"
+
+#define OLED_RESET 4
+Adafruit_SSD1306 display(OLED_RESET);

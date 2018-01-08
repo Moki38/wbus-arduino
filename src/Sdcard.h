@@ -1,5 +1,5 @@
 /*
- Copyright (C) 2017 Eric van Dijken <eric@team-moki.nl>
+ Copyright (C) 2018 Eric van Dijken <eric@team-moki.nl>
  Permission is hereby granted, free of charge, to any person obtaining a copy
  of this software and associated documentation files (the "Software"), to deal
  in the Software without restriction, including without limitation the rights
@@ -24,11 +24,15 @@
 #include <SD.h>
 #include <SPI.h>
 
+#include "Webasto.h"
+
 class Sdcard {
     public:
         void Init();
         void Read();
+        void Read(Webasto_Setup&);
         void Write();
+        void Write(Webasto_Setup&);
     private:
         File myFile;
         const int chipSelect = BUILTIN_SDCARD;

@@ -1,5 +1,5 @@
 /*
- Copyright (C) 2017 Eric van Dijken <eric@team-moki.nl>
+ Copyright (C) 2018 Eric van Dijken <eric@team-moki.nl>
  Permission is hereby granted, free of charge, to any person obtaining a copy
  of this software and associated documentation files (the "Software"), to deal
  in the Software without restriction, including without limitation the rights
@@ -20,6 +20,22 @@
 #pragma once
 #ifndef _WEBASTO_H
 #define _WEBASTO_H
+
+class Webasto_Setup {
+    public:
+        byte Heater_Type;    // 1 = EVO-40, 2 = 3500, 3 = 3900
+        bool Timer_Active;    // Timer active True / False;
+};
+
+class Webasto_Timer {
+    public:
+        byte sun;
+        byte sun_hour_on;
+        byte sun_min_on;
+        byte sun_hour_off;
+        byte sun_min_off;
+
+};
 
 class Webasto {
     public:

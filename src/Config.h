@@ -17,22 +17,23 @@
  THE SOFTWARE.
 */
 
-static const unsigned char PROGMEM power1_bmp[] =
-{ B00000000,
-  B00010000,
-  B00111000,
-  B01111100,
-  B11111110,
-  B00111000,
-  B00111000,
-  B00011100,
-  B00011100,
-  B00011110,
-  B00011110,
-  B00011100,
-  B00011100,
-  B00111000,
-  B01110000,
-  B00000000};
+//
+// Debug
+//
+#define DEBUG
 
+//
+// Webasto Version
+//
+#define WEBASTO	2
+
+// 
+// SD-Card available
+//
+#define SDCARD
+
+// 
+// Display 
+//
+#define DISPLAY 1
 
