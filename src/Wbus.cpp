@@ -23,113 +23,115 @@
 byte pos;
 byte len = 0;
 byte buffer[20];
+int version_run = 0;
 int status_run = 0;
 
 // 
 // Print Long State
 //
 
-void Wbus::Print_State(byte state) {
+const char* Wbus::Print_State(byte state) {
     switch(state) {
-        case 0x00 : Serial.println("0x00 Burn Out"); break;
-        case 0x01 : Serial.println("0x01 Deactivation"); break;
-        case 0x02 : Serial.println("0x02 Burn Out ADR"); break;
-        case 0x03 : Serial.println("0x03 Burn Out Ramp"); break;
-        case 0x04 : Serial.println("0x04 Off State"); break;
-        case 0x05 : Serial.println("0x05 Combustion process part load"); break;
-        case 0x06 : Serial.println("0x06 Combustion process full load"); break;
-        case 0x07 : Serial.println("0x07 Fuel supply"); break;
-        case 0x08 : Serial.println("0x08 Combustion air fan start"); break;
-        case 0x09 : Serial.println("0x09 Fuel supply interruption"); break;
-        case 0x0a : Serial.println("0x0a Diagnostic state"); break;
-        case 0x0b : Serial.println("0x0b Fuel pump interruption"); break;
-        case 0x0c : Serial.println("0x0c EMF measurement"); break;
-        case 0x0d : Serial.println("0x0d Debounce"); break;
-        case 0x0e : Serial.println("0x0e Deactivation"); break;
-        case 0x0f : Serial.println("0x0f Flame detector interrogation"); break;
-        case 0x10 : Serial.println("0x10 Flame detector cooling"); break;
-        case 0x11 : Serial.println("0x11 Flame detector measuring phase"); break;
-        case 0x12 : Serial.println("0x12 Flame detector measuring phase ZUE"); break;
-        case 0x13 : Serial.println("0x13 Fan start up"); break;
-        case 0x14 : Serial.println("0x14 Glow plug ramp"); break;
-        case 0x15 : Serial.println("0x15 Heater interlock"); break;
-        case 0x16 : Serial.println("0x16 Initialization"); break;
-        case 0x17 : Serial.println("0x17 Fuel bubble compensation"); break;
-        case 0x18 : Serial.println("0x18 Fan cold start-up"); break;
-        case 0x19 : Serial.println("0x19 Cold start enrichment"); break;
-        case 0x1a : Serial.println("0x1a Cooling"); break;
-        case 0x1b : Serial.println("0x1b Load change PL-FL"); break;
-        case 0x1c : Serial.println("0x1c Ventilation"); break;
-        case 0x1d : Serial.println("0x1d Load change FL-PL"); break;
-        case 0x1e : Serial.println("0x1e New initialization"); break;
-        case 0x1f : Serial.println("0x1f Controlled operation"); break;
-        case 0x20 : Serial.println("0x20 Control iddle period"); break;
-        case 0x21 : Serial.println("0x21 Soft start"); break;
-        case 0x22 : Serial.println("0x22 Savety time"); break;
-        case 0x23 : Serial.println("0x23 Purge"); break;
-        case 0x24 : Serial.println("0x24 Start"); break;
-        case 0x25 : Serial.println("0x25 Stabilization"); break;
-        case 0x26 : Serial.println("0x26 Start ramp"); break;
-        case 0x27 : Serial.println("0x27 Out of power"); break;
-        case 0x28 : Serial.println("0x28 Interlock"); break;
-        case 0x29 : Serial.println("0x29 Interlock ADR (Australian design rules)"); break;
-        case 0x2a : Serial.println("0x2a Stabilization time"); break;
-        case 0x2b : Serial.println("0x2b Change to controlled operation"); break;
-        case 0x2c : Serial.println("0x2c Decision state"); break;
-        case 0x2d : Serial.println("0x2d Prestart fuel supply"); break;
-        case 0x2e : Serial.println("0x2e Glowing"); break;
-        case 0x2f : Serial.println("0x2f Glowing power control"); break;
-        case 0x30 : Serial.println("0x30 Delay lowering"); break;
-        case 0x31 : Serial.println("0x31 Sluggish fan start"); break;
-        case 0x32 : Serial.println("0x32 Additional glowing"); break;
-        case 0x33 : Serial.println("0x33 Ignition interruption"); break;
-        case 0x34 : Serial.println("0x34 Ignition"); break;
-        case 0x35 : Serial.println("0x35 Intermittent glowing"); break;
-        case 0x36 : Serial.println("0x36 Application monitoring"); break;
-        case 0x37 : Serial.println("0x37 Interlock save to memory"); break;
-        case 0x38 : Serial.println("0x38 Heater interlock deactivation"); break;
-        case 0x39 : Serial.println("0x39 Output control"); break;
-        case 0x3a : Serial.println("0x3a Circulating pump control"); break;
-        case 0x3b : Serial.println("0x3b Initialization uP"); break;
-        case 0x3c : Serial.println("0x3c Stray light interrogation"); break;
-        case 0x3d : Serial.println("0x3d Prestart"); break;
-        case 0x3e : Serial.println("0x3e Pre-ignition"); break;
-        case 0x3f : Serial.println("0x3f Flame ignition"); break;
-        case 0x40 : Serial.println("0x40 Flame stabilization"); break;
-        case 0x41 : Serial.println("0x41 Combustion process parking heating"); break;
-        case 0x42 : Serial.println("0x42 Combustion process suppl. heating"); break;
-        case 0x43 : Serial.println("0x43 Combustion failure failure heating"); break;
-        case 0x44 : Serial.println("0x44 Combustion failure suppl. heating"); break;
-        case 0x45 : Serial.println("0x45 Heater off after run"); break;
-        case 0x46 : Serial.println("0x46 Control iddle after run"); break;
-        case 0x47 : Serial.println("0x47 After-run due to failure"); break;
-        case 0x48 : Serial.println("0x48 Time-controlled after-run due to failure"); break;
-        case 0x49 : Serial.println("0x49 Interlock circulation pump"); break;
-        case 0x4a : Serial.println("0x4a Control iddle after parking heating"); break;
-        case 0x4b : Serial.println("0x4b Control iddle after suppl. heating"); break;
-        case 0x4c : Serial.println("0x4c Control iddle period suppl. heating with circulation pump"); break;
-        case 0x4d : Serial.println("0x4d Circulation pump without heating function"); break;
-        case 0x4e : Serial.println("0x4e Waiting loop overvoltage"); break;
-        case 0x4f : Serial.println("0x4f Fault memory update"); break;
-        case 0x50 : Serial.println("0x50 Waiting loop"); break;
-        case 0x51 : Serial.println("0x51 Component test"); break;
-        case 0x52 : Serial.println("0x52 Boost"); break;
-        case 0x53 : Serial.println("0x53 Cooling"); break;
-        case 0x54 : Serial.println("0x54 Heater interlock permanent"); break;
-        case 0x55 : Serial.println("0x55 Fan iddle"); break;
-        case 0x56 : Serial.println("0x56 Break away"); break;
-        case 0x57 : Serial.println("0x57 Temperature interrogation"); break;
-        case 0x58 : Serial.println("0x58 Prestart undervoltage"); break;
-        case 0x59 : Serial.println("0x59 Accident interrogation"); break;
-        case 0x5a : Serial.println("0x5a After-run solenoid valve"); break;
-        case 0x5b : Serial.println("0x5b Fault memory update solenoid valve"); break;
-        case 0x5c : Serial.println("0x5c Timer-controlled after-run solenoid valve"); break;
-        case 0x5d : Serial.println("0x5d Startup attempt"); break;
-        case 0x5e : Serial.println("0x5e Prestart extension"); break;
-        case 0x5f : Serial.println("0x5f Combustion process"); break;
-        case 0x60 : Serial.println("0x60 Timer-controlled after-run due to undervoltage"); break;
-        case 0x61 : Serial.println("0x61 Fault memory update prior switch off"); break;
-        case 0x62 : Serial.println("0x62 Ramp full load"); break;
+        case 0x00 : return ("Burn Out"); break;
+        case 0x01 : return ("Deactivation"); break;
+        case 0x02 : return ("Burn Out ADR"); break;
+        case 0x03 : return ("Burn Out Ramp"); break;
+        case 0x04 : return ("Off State"); break;
+        case 0x05 : return ("Combustion process part load"); break;
+        case 0x06 : return ("Combustion process full load"); break;
+        case 0x07 : return ("Fuel supply"); break;
+        case 0x08 : return ("Combustion air fan start"); break;
+        case 0x09 : return ("Fuel supply interruption"); break;
+        case 0x0a : return ("Diagnostic state"); break;
+        case 0x0b : return ("Fuel pump interruption"); break;
+        case 0x0c : return ("EMF measurement"); break;
+        case 0x0d : return ("Debounce"); break;
+        case 0x0e : return ("Deactivation"); break;
+        case 0x0f : return ("Flame detector interrogation"); break;
+        case 0x10 : return ("Flame detector cooling"); break;
+        case 0x11 : return ("Flame detector measuring phase"); break;
+        case 0x12 : return ("Flame detector measuring phase ZUE"); break;
+        case 0x13 : return ("Fan start up"); break;
+        case 0x14 : return ("Glow plug ramp"); break;
+        case 0x15 : return ("Heater interlock"); break;
+        case 0x16 : return ("Initialization"); break;
+        case 0x17 : return ("Fuel bubble compensation"); break;
+        case 0x18 : return ("Fan cold start-up"); break;
+        case 0x19 : return ("Cold start enrichment"); break;
+        case 0x1a : return ("Cooling"); break;
+        case 0x1b : return ("Load change PL-FL"); break;
+        case 0x1c : return ("Ventilation"); break;
+        case 0x1d : return ("Load change FL-PL"); break;
+        case 0x1e : return ("New initialization"); break;
+        case 0x1f : return ("Controlled operation"); break;
+        case 0x20 : return ("Control iddle period"); break;
+        case 0x21 : return ("Soft start"); break;
+        case 0x22 : return ("Savety time"); break;
+        case 0x23 : return ("Purge"); break;
+        case 0x24 : return ("Start"); break;
+        case 0x25 : return ("Stabilization"); break;
+        case 0x26 : return ("Start ramp"); break;
+        case 0x27 : return ("Out of power"); break;
+        case 0x28 : return ("Interlock"); break;
+        case 0x29 : return ("Interlock ADR (Australian design rules)"); break;
+        case 0x2a : return ("Stabilization time"); break;
+        case 0x2b : return ("Change to controlled operation"); break;
+        case 0x2c : return ("Decision state"); break;
+        case 0x2d : return ("Prestart fuel supply"); break;
+        case 0x2e : return ("Glowing"); break;
+        case 0x2f : return ("Glowing power control"); break;
+        case 0x30 : return ("Delay lowering"); break;
+        case 0x31 : return ("Sluggish fan start"); break;
+        case 0x32 : return ("Additional glowing"); break;
+        case 0x33 : return ("Ignition interruption"); break;
+        case 0x34 : return ("Ignition"); break;
+        case 0x35 : return ("Intermittent glowing"); break;
+        case 0x36 : return ("Application monitoring"); break;
+        case 0x37 : return ("Interlock save to memory"); break;
+        case 0x38 : return ("Heater interlock deactivation"); break;
+        case 0x39 : return ("Output control"); break;
+        case 0x3a : return ("Circulating pump control"); break;
+        case 0x3b : return ("Initialization uP"); break;
+        case 0x3c : return ("Stray light interrogation"); break;
+        case 0x3d : return ("Prestart"); break;
+        case 0x3e : return ("Pre-ignition"); break;
+        case 0x3f : return ("Flame ignition"); break;
+        case 0x40 : return ("Flame stabilization"); break;
+        case 0x41 : return ("Combustion process parking heating"); break;
+        case 0x42 : return ("Combustion process suppl. heating"); break;
+        case 0x43 : return ("Combustion failure failure heating"); break;
+        case 0x44 : return ("Combustion failure suppl. heating"); break;
+        case 0x45 : return ("Heater off after run"); break;
+        case 0x46 : return ("Control iddle after run"); break;
+        case 0x47 : return ("After-run due to failure"); break;
+        case 0x48 : return ("Time-controlled after-run due to failure"); break;
+        case 0x49 : return ("Interlock circulation pump"); break;
+        case 0x4a : return ("Control iddle after parking heating"); break;
+        case 0x4b : return ("Control iddle after suppl. heating"); break;
+        case 0x4c : return ("Control iddle period suppl. heating with circulation pump"); break;
+        case 0x4d : return ("Circulation pump without heating function"); break;
+        case 0x4e : return ("Waiting loop overvoltage"); break;
+        case 0x4f : return ("Fault memory update"); break;
+        case 0x50 : return ("Waiting loop"); break;
+        case 0x51 : return ("Component test"); break;
+        case 0x52 : return ("Boost"); break;
+        case 0x53 : return ("Cooling"); break;
+        case 0x54 : return ("Heater interlock permanent"); break;
+        case 0x55 : return ("Fan iddle"); break;
+        case 0x56 : return ("Break away"); break;
+        case 0x57 : return ("Temperature interrogation"); break;
+        case 0x58 : return ("Prestart undervoltage"); break;
+        case 0x59 : return ("Accident interrogation"); break;
+        case 0x5a : return ("After-run solenoid valve"); break;
+        case 0x5b : return ("Fault memory update solenoid valve"); break;
+        case 0x5c : return ("Timer-controlled after-run solenoid valve"); break;
+        case 0x5d : return ("Startup attempt"); break;
+        case 0x5e : return ("Prestart extension"); break;
+        case 0x5f : return ("Combustion process"); break;
+        case 0x60 : return ("Timer-controlled after-run due to undervoltage"); break;
+        case 0x61 : return ("Fault memory update prior switch off"); break;
+        case 0x62 : return ("Ramp full load"); break;
+        default   : return ("Unknown");
    }
 }
 
@@ -138,7 +140,9 @@ void Wbus::Print_State(byte state) {
 //
 void Wbus::Init() {
     Serial1.begin(2400,SERIAL_8E1);
+#if DEBUG == 2
     Serial.println("Wbus initialization done.");
+#endif
 }
 
 //
@@ -234,9 +238,9 @@ void Wbus::Loop(Webasto &webasto) {
 //
 void Wbus::Parse(Webasto &webasto, byte *buf, byte len) {
 
-
-#ifdef DEBUG
+#if DEBUG == 2
     byte i = 0;
+
     for (i=0;i<len+1;i++) {
         Serial.print("0x"); 
         if (buf[i]<0x10) {Serial.print("0");} 
@@ -268,6 +272,14 @@ void Wbus::Parse(Webasto &webasto, byte *buf, byte len) {
     }
 
 //
+// Heater Info
+//
+    if (buf[2] == 0xD1) {
+        if (buf[3] == 0x0B) {
+        }
+    }
+
+//
 // Heater Status
 //
     if (buf[2] == 0xD0) {
@@ -275,12 +287,6 @@ void Wbus::Parse(Webasto &webasto, byte *buf, byte len) {
         if (buf[3] == 0x02) {
             webasto.status_ms = (buf[4] & 0x01) ? 1 : 0;
             webasto.status_shr = (buf[4] & 0x10) ? 1 : 0;
-#ifdef DEBUG
-            Serial.print("Main Switch: ");
-            Serial.println(webasto.status_ms);
-            Serial.print("Suplemental heater request: ");
-            Serial.println(webasto.status_shr);
-#endif
         }
         if (buf[3] == 0x03) {
             webasto.status_caf = (buf[4] & 0x01) ? 1 : 0;
@@ -297,18 +303,6 @@ void Wbus::Parse(Webasto &webasto, byte *buf, byte len) {
             webasto.status_fd     = buf[7];
             webasto.status_hp     = (buf[8]*256+buf[9])/10;
             webasto.status_fdr    = (buf[10]*256+buf[11])/10000;
-#ifdef DEBUG
-            Serial.print("Temperature: ");
-            Serial.println(webasto.status_temp);
-            Serial.print("Voltage (V): ");
-            Serial.println(webasto.status_mvolt);
-            Serial.print("Flame detector: ");
-            Serial.println(webasto.status_fd);
-            Serial.print("Heating power (W): ");
-            Serial.println(webasto.status_hp);
-            Serial.print("Flame detector resistance (m Ohm): ");
-            Serial.println(webasto.status_fdr);
-#endif
         }
         if (buf[3] == 0x06) {
             webasto.status_wh   = buf[4]*256+buf[5];
@@ -319,24 +313,61 @@ void Wbus::Parse(Webasto &webasto, byte *buf, byte len) {
         }
         if (buf[3] == 0x07) {
             webasto.status_os = buf[4];
-#ifdef DEBUG
-            Serial.println();
-            Print_State(webasto.status_os);
-#endif
+            webasto.status_os_long = Print_State(webasto.status_os);
         }
         if (buf[3] == 0x0F) {
             webasto.status_gpp  = buf[4]*2;
             webasto.status_fpf  = buf[5]*2;
             webasto.status_afp  = buf[6]*2;
-#ifdef DEBUG
-            Serial.print("Glow plug power: ");
-            Serial.println(webasto.status_gpp);
-            Serial.print("Fuel pump pulse frequency: ");
-            Serial.println(webasto.status_fpf);
-            Serial.print("Combustion air fan: ");
-            Serial.println(webasto.status_afp);
-#endif
         }
+    }
+}
+
+void Wbus::Version(Webasto &webasto) {
+//        byte info_version;     // Version
+//        byte info_devname;     // Device name
+//        byte info_wbuscode;    // WBUS Code
+//        byte info_wbusvers;    // WBUS version
+
+    switch(version_run) {
+        case 0:
+            Serial1.write(0xf4);
+            Serial1.write(0x03);
+            Serial1.write(0x51);
+            Serial1.write(0x02);
+            Serial1.write(0xa4);
+            version_run++;
+            break;
+        case 1:
+            Serial1.write(0xf4);
+            Serial1.write(0x03);
+            Serial1.write(0x51);
+            Serial1.write(0x0a);
+            Serial1.write(0xac);
+            version_run++;
+            break;
+        case 2:
+            Serial1.write(0xf4);
+            Serial1.write(0x03);
+            Serial1.write(0x51);
+            Serial1.write(0x0b);
+            Serial1.write(0xad);
+            version_run++;
+            break;
+        case 3:
+            Serial1.write(0xf4);
+            Serial1.write(0x03);
+            Serial1.write(0x51);
+            Serial1.write(0x0c);
+            Serial1.write(0xae);
+            version_run++;
+            break;
+    }
+
+    if (version_run > 6) {
+        version_run = 0;
+    } else {
+       version_run++;
     }
 }
 
@@ -392,6 +423,7 @@ void Wbus::Status(Webasto &webasto) {
             break;
         case 6:
             status_run = 0;
+            Version(webasto);
             break;
     }
 }

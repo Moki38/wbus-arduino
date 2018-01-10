@@ -20,25 +20,24 @@
 
 #include <Arduino.h>
 #include "Config.h"
-#include "Webasto.h"
 
 #pragma once
-#ifndef _WBUS_H
-#define _WBUS_H
+#ifndef _DISPLAY_H
+#define _DISPLAY_H
+
+#include <Time.h>
+#include "Symbols.h"
+#include "Webasto.h"
+
+#include <Adafruit_GFX.h>
+#include <Adafruit_SSD1306.h>
+
         
-class Wbus {
+class Display {
     public:
         void Init();
-        byte Checksum(byte *, byte, byte);
-        const char* Print_State(byte);
-        void Combine(int);
-        void On(Webasto&, int);
-        void Off(Webasto&);
-        void Loop(Webasto&);
-        void Gather(Webasto&, int);
-        void Parse(Webasto&, byte *, byte);
-        void Version(Webasto&);
-        void Status(Webasto&);
+        void printDigits(int);
+        void Print(Webasto&);
     private:
 };
 

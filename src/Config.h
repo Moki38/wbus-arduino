@@ -20,10 +20,12 @@
 //
 // Debug
 //
-#define DEBUG
+//#define DEBUG 1
 
 //
 // Webasto Version
+//     1:    Webasto 3500/3900
+//     2:    EVO-40
 //
 #define WEBASTO	2
 
@@ -34,6 +36,7 @@
 
 // 
 // Display 
+//     1: OLED Yelllow/Blue 128x64 (i2c 0x3c)
 //
-#define DISPLAY 1
+#define DISPLAY_TYPE 1
 

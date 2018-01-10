@@ -54,7 +54,9 @@ class Webasto {
         byte status_fi;        // Flame indicator
         byte status_ms;        // Main switch
         byte status_shr;       // Suplemental heater request
+
         byte status_os;        // Operating state
+        String status_os_long; // Operating state Text
 
         byte status_temp;      // Temperature with  50 C offset (20 C is value=70)
         float status_mvolt;    // Voltage in mili Volt
@@ -75,6 +77,7 @@ class Webasto {
         byte info_version;     // Version 
         byte info_devname;     // Device name
         byte info_wbuscode;    // WBUS Code
+        byte info_wbusvers;    // WBUS version
 };
 
 #endif

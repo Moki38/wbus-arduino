@@ -38,6 +38,10 @@ boolean command_complete = false;
 Sdcard S;
 #endif
 
+#ifdef DISPLAY
+Display D;
+#endif
+
 Wbus W;
 Webasto webasto;
 Webasto_Setup webasto_setup; 
@@ -45,22 +49,21 @@ Webasto_Setup webasto_setup;
 int webasto_time = 0;
 
 void setup() {
-    // Open serial communications and wait for port to open:
+    // Open serial communications
     Serial.begin(115200);
-//    while (!Serial) {
-//          ; // wait for serial port to connect. Needed for Leonardo only
-//    }
-
-    display.begin(SSD1306_SWITCHCAPVCC, 0x3C);  // initialize with the I2C addr 0x3D (for the 128x64)
 
     webasto.timer = false;
     webasto.temp = 21;
     webasto.mode = 2;
     webasto.status_temp = 0;
 
-    display.clearDisplay();
-
+#ifdef DEBUG
     Serial.println("Starting Webasto Controller...");
+#endif
+
+#ifdef DISPLAY
+    D.Init();
+#endif
 
 #ifdef SDCARD
     S.Init();
@@ -76,19 +79,12 @@ void webasto_loop() {
     W.Status(webasto);
     delay(100);
     W.Loop(webasto);
-}
-
-void printDigits(int digits) {
-    // utility function for digital clock display: prints preceding colon and leading 0
-    if (digits < 10) {
-        display.print('0');
-    }
-    display.print(digits);
+    
+    D.Print(webasto);
 }
 
 void loop() {
     int time = millis();
-    time_t t = now();
 
     //
     // Every 10000 μs run the webasto loop
@@ -96,75 +92,6 @@ void loop() {
     if (time >= (webasto_time + 2000)) {
         webasto_loop();
     }
-
-
-
-    display.clearDisplay();
-    display.setTextSize(1);
-    display.setTextColor(WHITE);
-
-    display.setCursor(0,0);
-    if (webasto.timer) {
-        display.setTextColor(BLACK, WHITE); // 'inverted' text
-    } else {
-        display.setTextColor(WHITE);
-    }
-    display.print("T");
-    display.setTextColor(WHITE);
-
-
-    display.setCursor(20,0);
-    display.print(webasto.status_temp);
-//    printDigits(webasto.status_temp);
-//    Serial.println(webasto.status_temp);
-//    Serial.print("Main switch: ");
-//    Serial.println(webasto.status_ms);
-    display.print("'C");
- 
-    display.setCursor(68,0);
-    display.print(dayShortStr(weekday()));
- 
-    display.setCursor(94,0);
-    printDigits(hour(t));
-    display.print(":");
-    printDigits(minute(t));
-
-
-    display.setTextSize(2);
-    display.setTextColor(WHITE);
-    display.setCursor(20,8);
-    switch(webasto.mode) {
-        case 1:
-            display.drawBitmap(24, 8,  power1_bmp, 8, 16, 1);
-            break;
-        case 2:
-            display.drawBitmap(20, 8,  power1_bmp, 8, 16, 1);
-            display.drawBitmap(28, 8,  power1_bmp, 8, 16, 1);
-            break;
-        case 3:
-            display.drawBitmap(16, 8,  power1_bmp, 8, 16, 1);
-            display.drawBitmap(24, 8,  power1_bmp, 8, 16, 1);
-            display.drawBitmap(32, 8,  power1_bmp, 8, 16, 1);
-            break;
-    }
-    
-
-    display.setCursor(70,8);
-    display.print(webasto.temp);
-    display.setTextSize(1);
-    display.print("o");
-    display.setTextSize(2);
-    display.println("C");
-    display.setTextSize(1);
-
-    display.setCursor(0,24);
-    display.print(webasto.status_os,HEX);
-
-    display.setCursor(20,24);
-    display.print("Power: ");
-    display.print(webasto.status_hp);
-    display.println("W");
-    display.display();
 
     if (command_complete) {
         serial_command.trim();
@@ -185,7 +112,7 @@ void loop() {
             W.Off(webasto);
         }
 
-#ifndef DEBUG
+#if DEBUG == 2
             Serial.print("Command: ");
             Serial.print(command);
             Serial.print(" Value: ");

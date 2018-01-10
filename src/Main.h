@@ -24,10 +24,6 @@
 #include <SPI.h>
 #include <Wire.h>
 #include <Time.h>
-#include <Adafruit_GFX.h>
-#include <Adafruit_SSD1306.h>
-
-#include "Symbols.h"
 
 #ifdef SDCARD
 #include "Sdcard.h"
@@ -36,5 +32,7 @@
 #include "Webasto.h"
 #include "Wbus.h"
 
-#define OLED_RESET 4
-Adafruit_SSD1306 display(OLED_RESET);
+#ifdef DISPLAY
+#include "Display.h"
+#endif
+
