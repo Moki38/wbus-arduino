@@ -24,6 +24,7 @@
 #include <SPI.h>
 #include <Wire.h>
 #include <Time.h>
+#include <TimeAlarms.h>
 
 #ifdef SDCARD
 #include "Sdcard.h"

@@ -18,12 +18,6 @@
 */
 
 #include "Main.h"
-#include <Arduino.h> 
-
-#ifdef SDCARD
-#include <SD.h>
-#include <SPI.h>
-#endif
 
 //
 // Serial vars
@@ -73,13 +67,39 @@ void setup() {
     W.Init();
 }
 
+void webasto_off() {
+    W.Off(webasto);
+}
+
 void webasto_loop() {
     webasto_time = millis();
 
     W.Status(webasto);
-    delay(100);
+    Alarm.delay(100);
+//
+// Frost protection
+// 
+    if (webasto.status_temp < 5) {
+
+//
+// Turn On Heater (at 10'C)
+//
+        W.On(webasto, 10);
+        Alarm.delay(100);
+
+//
+// Stop after 1 hour
+//
+        Alarm.timerOnce(3600, webasto_off);
+    }
+//
+// Webasto Loop
+//
     W.Loop(webasto);
-    
+
+//
+// Display Status
+//    
     D.Print(webasto);
 }
 
@@ -93,6 +113,9 @@ void loop() {
         webasto_loop();
     }
 
+//
+// Parse commands send to us on /dev/ACM0
+//
     if (command_complete) {
         serial_command.trim();
         int pos = serial_command.indexOf(':');
@@ -100,6 +123,11 @@ void loop() {
         value_string = serial_command.substring(pos + 1);
         value = value_string.toInt();
 
+//
+// Example UTC + 1
+//
+// t=`date +%s` ; s=`echo -n "TIME:" ; expr $t + 3600` ; echo $s > /dev/ttyACM0
+//
         if (command == "TIME") {
             setTime(value);
         }

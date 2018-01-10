@@ -195,6 +195,13 @@ void Wbus::Gather(Webasto &webasto, int B) {
 //
 void Wbus::On(Webasto &webasto, int temp) {
     webasto.keepalive = true;
+    if (temp < 5) {
+        temp = 5;
+    }
+    if (temp > 35) {
+        temp = 35;
+    }
+
 // 0x34,0x05,0x2A,0x21,0xFF,0x48,0x8D 
     Serial1.write(0xf4);
     Serial1.write(0x05);
