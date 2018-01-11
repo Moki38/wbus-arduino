@@ -13,7 +13,7 @@ A Smart Controller for Webasto Heaters (currently only EVO-40 has been tested)
 - OLED Yellow/Blue 128x32
 - NXP MC33660 / MC33290
 
-## If you use a Raspberry PI like me, use these commands to setup your enviromment
+## If you use a Raspberry Pi like me, use these commands to setup your enviromment
 ```console
 sudo su -
 apt-get install -y locate htop git i2c-tools build-essential
