@@ -45,8 +45,12 @@ Display D;
 Wbus W;
 Webasto webasto;
 Webasto_Setup webasto_setup; 
-
 int webasto_time = 0;
+
+
+Led L;
+Menu M;
+Button B;
 
 void setup() {
     // Open serial communications
@@ -69,6 +73,10 @@ void setup() {
     S.Init();
     S.Read(webasto_setup);
 #endif
+
+    B.Init();
+    M.Init();
+    L.Init();
 
     W.Init();
 }

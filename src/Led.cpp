@@ -22,5 +22,8 @@
 // Led Init 
 //
 void Led::Init() {
+    pinMode(LED_PIN_R, OUTPUT);
+    pinMode(LED_PIN_G, OUTPUT);
+    pinMode(LED_PIN_B, OUTPUT);
 }
 

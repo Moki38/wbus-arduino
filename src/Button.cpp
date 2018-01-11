@@ -16,29 +16,12 @@
  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  THE SOFTWARE.
 */
-
-#include "Config.h"
-
-#include <Arduino.h>
-
-#include <SPI.h>
-#include <Wire.h>
-#include <Time.h>
-#include <TimeAlarms.h>
-#include <Encoder.h>
-
-#ifdef SDCARD
-#include "Sdcard.h"
-#endif
-
-#include "Webasto.h"
-#include "Wbus.h"
-
-#ifdef DISPLAY
-#include "Display.h"
-#endif
-
-#include "Led.h"
-#include "Menu.h"
 #include "Button.h"
+
+//
+// Button Init 
+//
+void Button::Init() {
+    pinMode(ROT_BUTTON, INPUT);
+}
 

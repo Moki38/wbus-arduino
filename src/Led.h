@@ -20,6 +20,8 @@
 #pragma once
 #ifndef _LED_H
 #define _LED_H
+#include <Arduino.h>
+#include "Config.h"
 
 class Led {
     public:

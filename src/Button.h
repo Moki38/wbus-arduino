@@ -17,28 +17,17 @@
  THE SOFTWARE.
 */
 
-#include "Config.h"
+#pragma once
+#ifndef _BUTTON_H
+#define _BUTTON_H
 
 #include <Arduino.h>
+#include "Config.h"
 
-#include <SPI.h>
-#include <Wire.h>
-#include <Time.h>
-#include <TimeAlarms.h>
-#include <Encoder.h>
+class Button {
+    public:
+        void Init();
+    private:
+};
 
-#ifdef SDCARD
-#include "Sdcard.h"
 #endif
-
-#include "Webasto.h"
-#include "Wbus.h"
-
-#ifdef DISPLAY
-#include "Display.h"
-#endif
-
-#include "Led.h"
-#include "Menu.h"
-#include "Button.h"
-

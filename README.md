@@ -43,6 +43,7 @@ pio init -b teensy36
 
 pio lib install git+https://github.com/adafruit/Adafruit-GFX-Library
 pio lib install git+https://github.com/adafruit/Adafruit_SSD1306
+pio lib install git+https://github.com/PaulStoffregen/Encoder.git
 
 pio run -t upload
 ```

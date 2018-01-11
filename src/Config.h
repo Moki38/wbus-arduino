@@ -46,6 +46,8 @@
 #define ROT_PIN_A	5
 #define ROT_PIN_B	6
 
+#define ROT_BUTTON	7
+
 //
 // Led Pins
 //
