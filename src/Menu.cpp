@@ -16,40 +16,11 @@
  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  THE SOFTWARE.
 */
+#include "Menu.h"
 
 //
-// Debug
+// Menu Init 
 //
-//#define DEBUG 1
-
-//
-// Webasto Version
-//     1:    Webasto 3500/3900
-//     2:    EVO-40
-//
-#define WEBASTO	2
-
-// 
-// SD-Card available
-//
-#define SDCARD
-
-// 
-// Display 
-//     1: OLED Yelllow/Blue 128x64 (i2c 0x3c)
-//
-#define DISPLAY_TYPE 1
-
-//
-// Rotary Encoder
-//
-#define ROT_PIN_A	5
-#define ROT_PIN_B	6
-
-//
-// Led Pins
-//
-#define LED_PIN_R	2
-#define LED_PIN_G	3
-#define LED_PIN_B	4
+void Menu::Init() {
+}
 

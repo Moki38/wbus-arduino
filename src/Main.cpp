@@ -28,6 +28,12 @@ String value_string = "";
 int value = 0;
 boolean command_complete = false;
 
+//
+// Encoder
+//
+Encoder myEnc(ROT_PIN_A, ROT_PIN_B);
+long oldPosition  = -999;
+
 #ifdef SDCARD
 Sdcard S;
 #endif
@@ -111,6 +117,16 @@ void loop() {
     //
     if (time >= (webasto_time + 2000)) {
         webasto_loop();
+    }
+
+//
+// Encoder Loop
+//
+    long newPosition = myEnc.read();
+    if (newPosition != oldPosition) {
+        oldPosition = newPosition;
+        Serial.print("Rotary Encoder Position: ");
+        Serial.println(newPosition);
     }
 
 //

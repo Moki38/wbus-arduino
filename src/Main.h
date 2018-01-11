@@ -25,6 +25,7 @@
 #include <Wire.h>
 #include <Time.h>
 #include <TimeAlarms.h>
+#include <Encoder.h>
 
 #ifdef SDCARD
 #include "Sdcard.h"
@@ -36,4 +37,7 @@
 #ifdef DISPLAY
 #include "Display.h"
 #endif
+
+#include "Led.h"
+#include "Menu.h"
 
