@@ -34,6 +34,7 @@ python get-platformio.py
 pip install -U platformio 
 
 git clone https://github.com/Moki38/wbus-arduino.git
+cd wbus-arduino
 ```
 
 ## Installation
