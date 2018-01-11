@@ -126,9 +126,9 @@ void loop() {
 //
 // Example UTC + 1
 //
-// t=`date +%s` ; s=`echo -n "TIME:" ; expr $t + 3600` ; echo $s > /dev/ttyACM0
+// t=`date +%s` ; s=`echo -n "DATE:" ; expr $t + 3600` ; echo $s > /dev/ttyACM0
 //
-        if (command == "TIME") {
+        if (command == "DATE") {
             setTime(value);
         }
 
