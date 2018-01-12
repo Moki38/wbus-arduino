@@ -17,6 +17,11 @@
  THE SOFTWARE.
 */
 
+// 
+// Version
+//
+#define VERSION 0.0.1
+
 //
 // Debug
 //
@@ -44,8 +49,8 @@
 // Rotary Encoder
 //
 #define ROTARY_ENCODER
-#define ROT_PIN_A	5
-#define ROT_PIN_B	6
+#define ROT_PIN_A	A6
+#define ROT_PIN_B	A7
 #define ROT_BUTTON	7
 
 //

@@ -66,7 +66,7 @@ void setup() {
     webasto.timer = false;
     webasto.temp = 21;
     webasto.mode = 2;
-    webasto.status_temp = 0;
+    webasto.status_temp = 21;
 
 #ifdef DEBUG
     Serial.println("Starting Webasto Controller...");
