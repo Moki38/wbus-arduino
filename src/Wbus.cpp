@@ -131,6 +131,11 @@ const char* Wbus::Print_State(byte state) {
         case 0x60 : return ("Timer-controlled after-run due to undervoltage"); break;
         case 0x61 : return ("Fault memory update prior switch off"); break;
         case 0x62 : return ("Ramp full load"); break;
+
+//
+// A lot of codes are still missing.
+//
+
         default   : return ("Unknown");
    }
 }
