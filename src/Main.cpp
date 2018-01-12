@@ -34,6 +34,12 @@ boolean command_complete = false;
 Encoder myEnc(ROT_PIN_A, ROT_PIN_B);
 long oldPosition  = -999;
 
+//
+// Button
+//
+int buttonState = 0;
+int oldbuttonState = 0;
+
 #ifdef SDCARD
 Sdcard S;
 #endif
@@ -41,6 +47,7 @@ Sdcard S;
 #ifdef DISPLAY
 Display D;
 #endif
+int display_time = 0;
 
 Wbus W;
 Webasto webasto;
@@ -102,31 +109,69 @@ void webasto_loop() {
         Alarm.delay(100);
 
 //
-// Stop after 1 hour
+// Set an Alarm to stop after 1 hour (3600 seconds) running time.
 //
-        Alarm.timerOnce(3600, webasto_off);
+        webasto.frostalarm = Alarm.timerOnce(3600, webasto_off);
     }
+//
+// or if temperature has already reached 10'C
+//
+    if (Alarm.isAlarm(webasto.frostalarm)) {
+        if(webasto.status_temp >= 10) {
+            Alarm.free(webasto.frostalarm);
+            webasto_off();
+        }
+    }
+
 //
 // Webasto Loop
 //
     W.Loop(webasto);
+}
 
+void display_loop() {
+    display_time = millis();
+
+#ifdef DISPLAY
 //
 // Display Status
 //    
     D.Print(webasto);
+
+#endif
 }
 
 void loop() {
     int time = millis();
 
     //
-    // Every 10000 μs run the webasto loop
+    // Every 2000 μs run the webasto loop
     //
     if (time >= (webasto_time + 2000)) {
         webasto_loop();
     }
 
+    //
+    // Every 2000 μs run the display loop
+    //
+    if (time >= (display_time + 2000)) {
+        display_loop();
+    }
+
+//
+// Button Loop
+//
+    buttonState = digitalRead(ROT_BUTTON);
+    if (buttonState != oldbuttonState) {
+
+        // HIGH == Button Pushed
+        if (buttonState == HIGH) {
+        } else {
+        // LOW == Button Released
+        }
+    }
+
+#ifdef ROTARY_ENCODER
 //
 // Encoder Loop
 //
@@ -136,7 +181,7 @@ void loop() {
         Serial.print("Rotary Encoder Position: ");
         Serial.println(newPosition);
     }
-
+#endif //ROTARY_ENCODER
 //
 // Parse commands send to us on /dev/ACM0
 //

@@ -10,7 +10,7 @@ A Smart Controller for Webasto Heaters (currently only EVO-40 has been tested)
 - PlatformIO
 - Teensy 3.6
 - Webasto EVO-40
-- OLED Yellow/Blue 128x32
+- OLED Yellow/Blue 128x64
 - NXP MC33660 / MC33290
 
 ## If you use a Raspberry Pi like me, use these commands to setup your enviromment

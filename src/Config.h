@@ -43,14 +43,15 @@
 //
 // Rotary Encoder
 //
+#define ROTARY_ENCODER
 #define ROT_PIN_A	5
 #define ROT_PIN_B	6
-
 #define ROT_BUTTON	7
 
 //
 // Led Pins
 //
+#define LED
 #define LED_PIN_R	2
 #define LED_PIN_G	3
 #define LED_PIN_B	4

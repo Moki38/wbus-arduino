@@ -20,6 +20,7 @@
 #pragma once
 #ifndef _WEBASTO_H
 #define _WEBASTO_H
+#include <TimeAlarms.h>
 
 class Webasto_Setup {
     public:
@@ -39,6 +40,7 @@ class Webasto_Timer {
 
 class Webasto {
     public:
+        AlarmID_t frostalarm;
         bool keepalive;
         bool on;
         bool timer;
