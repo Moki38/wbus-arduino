@@ -177,9 +177,19 @@ void loop() {
 //
     long newPosition = myEnc.read();
     if (newPosition != oldPosition) {
-        oldPosition = newPosition;
-        Serial.print("Rotary Encoder Position: ");
-        Serial.println(newPosition);
+        if (newPosition > oldPosition+1) {
+            Serial.print("Rotary Encoder Rotate: ");
+            Serial.println("RIGHT");
+            oldPosition = newPosition;
+        }
+        if (newPosition < oldPosition-1) {
+            Serial.print("Rotary Encoder Rotate: ");
+            Serial.println("LEFT");
+            oldPosition = newPosition;
+        }
+
+//        Serial.print("Rotary Encoder Position: ");
+//        Serial.println(newPosition);
     }
 #endif //ROTARY_ENCODER
 //
