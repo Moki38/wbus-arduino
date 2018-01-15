@@ -132,7 +132,7 @@ void Menu::Init() {
     MenuItem[10].Text[1] = "Temperature";
     MenuItem[11].Text[1] = "Ventilation";
     MenuItem[12].Text[1] = "Level";
-    MenuItem[13].Text[1] = "Delete All Timers"
+    MenuItem[13].Text[1] = "Delete All Timers";
     MenuItem[14].Text[1] = "Ok";
     MenuItem[15].Text[1] = "Back";
 
