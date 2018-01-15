@@ -20,12 +20,31 @@
 #pragma once
 #ifndef _MENU_H
 #define _MENU_H
+#include <Arduino.h>
 #include "Config.h"
+
+#define MAX_MENU_ITEMS 100
+
 
 class Menu {
     public:
         void Init();
+        bool IsActive();
+        void Enable(); 
+        void Disable(); 
+        byte Next(byte);
+        byte Prev(byte);
+        byte Parent(byte);
+        byte Child(byte);
     private:
+        bool menuisactive;
+        struct MenuItems {
+            String Text;
+            byte Next;
+            byte Prev;
+            byte Parent;
+            byte Child;
+        } MenuItem[MAX_MENU_ITEMS];
 };
 
 #endif

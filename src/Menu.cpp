@@ -22,5 +22,40 @@
 // Menu Init 
 //
 void Menu::Init() {
+    menuisactive = false;
+
+    MenuItem[ 1].Text = "Timer";       MenuItem[ 1].Next = 15; MenuItem[ 1].Prev = 58; MenuItem[ 1].Parent = 0;  MenuItem[ 1].Child = 2;
+    MenuItem[15].Text = "Heater";      MenuItem[15].Next = 20; MenuItem[15].Prev =  1; MenuItem[15].Parent = 0;  MenuItem[15].Child = 2;
+    MenuItem[20].Text = "Ventilation"; MenuItem[20].Next = 24; MenuItem[20].Prev = 15; MenuItem[20].Parent = 0;  MenuItem[20].Child = 2;
+    MenuItem[24].Text = "Settings";    MenuItem[24].Next = 58; MenuItem[24].Prev = 20; MenuItem[24].Parent = 0;  MenuItem[24].Child = 2;
+    MenuItem[58].Text = "Exit";        MenuItem[58].Next =  1; MenuItem[58].Prev = 24; MenuItem[58].Parent = 0;  MenuItem[58].Child = 2;
 }
 
+
+bool Menu::IsActive() {
+    return(menuisactive);
+}
+
+void Menu::Enable() {
+    menuisactive = true;
+}
+
+void Menu::Disable() {
+    menuisactive = false;
+}
+
+byte Menu::Next(byte item) {
+    return (MenuItem[item].Next);
+}
+
+byte Menu::Prev(byte item) {
+    return (MenuItem[item].Prev);
+}
+
+byte Menu::Parent(byte item) {
+    return (MenuItem[item].Parent);
+}
+
+byte Menu::Child(byte item) {
+    return (MenuItem[item].Child);
+}
