@@ -29,6 +29,7 @@ class Led {
         void Led_R_On();
         void Led_G_On();
         void Led_B_On();
+        void Led_Off();
         void Led_R_Off();
         void Led_G_Off();
         void Led_B_Off();

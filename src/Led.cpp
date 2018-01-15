@@ -25,26 +25,40 @@ void Led::Init() {
     pinMode(LED_PIN_R, OUTPUT);
     pinMode(LED_PIN_G, OUTPUT);
     pinMode(LED_PIN_B, OUTPUT);
+
+// LED off
+    digitalWrite(LED_PIN_R, HIGH);
+    digitalWrite(LED_PIN_G, HIGH);
+    digitalWrite(LED_PIN_B, HIGH);
 }
 
 //
 // Led_R_On
 //
 void Led::Led_R_On() {
-    digitalWrite(LED_PIN_R, HIGH);
+    digitalWrite(LED_PIN_R, LOW);
 }
 
 //
 // Led_G_On
 //
 void Led::Led_G_On() {
-    digitalWrite(LED_PIN_G, HIGH);
+    digitalWrite(LED_PIN_G, LOW);
 }
 
 //
 // Led_B_On
 //
 void Led::Led_B_On() {
+    digitalWrite(LED_PIN_B, LOW);
+}
+
+//
+// All Leds Off
+//
+void Led::Led_Off() {
+    digitalWrite(LED_PIN_R, HIGH);
+    digitalWrite(LED_PIN_G, HIGH);
     digitalWrite(LED_PIN_B, HIGH);
 }
 
@@ -52,21 +66,21 @@ void Led::Led_B_On() {
 // Led_R_Off
 //
 void Led::Led_R_Off() {
-    digitalWrite(LED_PIN_R, LOW);
+    digitalWrite(LED_PIN_R, HIGH);
 }
 
 //
 // Led_G_Off
 //
 void Led::Led_G_Off() {
-    digitalWrite(LED_PIN_G, LOW);
+    digitalWrite(LED_PIN_G, HIGH);
 }
 
 //
 // Led_B_Off
 //
 void Led::Led_B_Off() {
-    digitalWrite(LED_PIN_B, LOW);
+    digitalWrite(LED_PIN_B, HIGH);
 }
 
 
