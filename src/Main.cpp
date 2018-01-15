@@ -39,6 +39,7 @@ long oldPosition  = -999;
 //
 int buttonState = 0;
 int oldbuttonState = 0;
+int button_time = 0;
 
 #ifdef SDCARD
 Sdcard S;
@@ -163,11 +164,17 @@ void loop() {
 //
     buttonState = digitalRead(ROT_BUTTON);
     if (buttonState != oldbuttonState) {
+        button_time = millis();
 
         // HIGH == Button Pushed
         if (buttonState == HIGH) {
         } else {
         // LOW == Button Released
+            if (time >= (button_time + 3000)) {
+            // Long Push    
+            } else {
+            // Short Push    
+            }
         }
     }
 

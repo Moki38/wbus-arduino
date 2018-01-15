@@ -24,7 +24,7 @@
 #include "Config.h"
 
 #define MAX_MENU_ITEMS 100
-
+#define MAX_LANGUAGES  2
 
 class Menu {
     public:
@@ -39,7 +39,7 @@ class Menu {
     private:
         bool menuisactive;
         struct MenuItems {
-            String Text;
+            String Text[MAX_LANGUAGES];
             byte Next;
             byte Prev;
             byte Parent;
