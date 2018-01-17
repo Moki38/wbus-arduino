@@ -20,7 +20,7 @@
 // 
 // Version
 //
-#define VERSION 0.0.1
+#define VERSION 0.0.2
 
 //
 // Debug
@@ -49,15 +49,15 @@
 // Rotary Encoder
 //
 #define ROTARY_ENCODER
-#define ROT_PIN_A	A6
-#define ROT_PIN_B	A7
-#define ROT_BUTTON	7
+#define ROT_PIN_A	A18
+#define ROT_PIN_B	A19
+#define ROT_BUTTON	36
 
 //
 // Led Pins
 //
 #define LED
-#define LED_PIN_R	2
-#define LED_PIN_G	3
-#define LED_PIN_B	4
+#define LED_PIN_R	34
+#define LED_PIN_G	35
+#define LED_PIN_B	33
 

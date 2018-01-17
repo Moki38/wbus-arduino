@@ -38,8 +38,9 @@ long oldPosition  = -999;
 // Button
 //
 int buttonState = 0;
-int oldbuttonState = 0;
+int oldbuttonState = -1;
 int button_time = 0;
+bool button_hold = false;
 
 #ifdef SDCARD
 Sdcard S;
@@ -160,20 +161,39 @@ void loop() {
     }
 
 //
+// Led off
+//
+
+    L.Led_R_Off();
+    L.Led_G_Off();
+    L.Led_B_Off();
+
+//
 // Button Loop
 //
     buttonState = digitalRead(ROT_BUTTON);
-    if (buttonState != oldbuttonState) {
-        button_time = millis();
-
-        // HIGH == Button Pushed
-        if (buttonState == HIGH) {
+    if (buttonState == HIGH) {
+        if (oldbuttonState != buttonState) {
+            oldbuttonState = buttonState;
+            Serial.println("Button Pressed");
+            button_time = millis();
         } else {
-        // LOW == Button Released
             if (time >= (button_time + 3000)) {
-            // Long Push    
+                if (!button_hold) {
+                    Serial.println("HOLD");
+                    button_hold = true;
+                }
+            }
+        }
+    } else {
+        if (oldbuttonState != buttonState) {
+            oldbuttonState = buttonState;
+            Serial.println("Button Released");
+            button_hold = false; 
+            if (time >= (button_time + 3000)) {
+                Serial.println("LONG");
             } else {
-            // Short Push    
+                Serial.println("SHORT");
             }
         }
     }
