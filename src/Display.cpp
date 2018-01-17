@@ -61,6 +61,7 @@ void Display::Print(Webasto &webasto) {
     display.setTextColor(WHITE);
 
     display.setCursor(0,0);
+
     if (webasto.timer) {
         display.setTextColor(BLACK, WHITE); // 'inverted' text
     } else {
@@ -117,6 +118,7 @@ void Display::Print(Webasto &webasto) {
     display.print("Power: ");
     display.print(webasto.status_hp);
     display.println("W");
+
     display.display();
 #endif
 
